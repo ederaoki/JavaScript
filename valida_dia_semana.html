@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt_br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valida dia da semana</title>
+</head>
+<body>
+    <p>Escolha um dia da semana, para iniciar e terminar o período: <br>
+    <select id="pDI_SEMANA">
+        <option value="" selected>Selecione</option>
+        <option value="1">Domingo</option>
+        <option value="2">Segunda-feira</option>
+        <option value="3">Terça-feira</option>
+        <option value="4">Quarta-feira</option>
+        <option value="5">Quinta-feira</option>
+        <option value="6">Sexta-feira</option>
+        <option value="7">Sábado</option>
+    </select> </p>
+    <p>Escolha a data de início: 
+    <input type="date" name="" id="pDT_INICIO" onchange="valida_dia_semana()"></p>
+    <p>Escolha a data de término
+    <input type="date" name="" id="pDT_TERMINO" onchange="valida_dia_semana()"></p>
+
+    <script>
+        
+        function valida_dia_semana() {
+                    let p_dia_semana = document.querySelector("#pDI_SEMANA").value;             //input que escolhe o dia da semana
+                    console.log("Dia escolhido: ",p_dia_semana,"-feiras");
+                    
+                    let semana = ["2", "3", "4", "5", "6", "7", "1"];                           // array pra mostrar o dia da semana
+                    let p_diaInicio = new Date(document.getElementById("pDT_INICIO").value);    // dia escolhido na data inicial.
+                    let p_diaTermino = new Date(document.getElementById("pDT_TERMINO").value);  // dia escolhido na data termino.
+                    
+                    //    analisa dia de início
+                    let d_semana = new Date(p_diaInicio).getDay();             //    pega o dia do calendário e tranforma em dia da semana, iniciando com 0 na segunda-feira.
+                    let dia_da_semana = semana[d_semana];  // .
+                    console.log(dia_da_semana);
+                
+                    if (p_dia_semana == dia_da_semana) {
+                        console.log("Dia da semana => início OK");                        
+                    }
+                    else {
+                        Alert("Dia da semana => início diferente");
+                        document.getElementById("pDT_INICIO").focus();
+                        return;
+                    }
+                    
+                    //    analisa dia de término                    
+                    d_semana = new Date(p_diaTermino).getDay();             //    pega o dia do calendário e tranforma em dia da semana, iniciando com 0 na segunda-feira.
+                    dia_da_semana = semana[d_semana];  // .
+                    console.log(dia_da_semana);
+                
+                    if (p_dia_semana == dia_da_semana) {
+                        console.log("Dia da semana => Término OK");
+
+                    } else {
+                        alert("Dia da semana => término diferente");
+                        document.getElementById("pDT_TERMINO").focus();
+                        return;
+
+                    }                    
+
+                    if(p_diaInicio < p_diaTermino) {
+                        alert("Dias OK")
+                    } else {
+                        alert("Data Término menor que Início");
+                        document.getElementById("pDT_TERMINO").focus();
+                    }
+                }
+    </script>
+</body>
+</html>
